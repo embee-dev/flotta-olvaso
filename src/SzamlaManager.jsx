@@ -8,7 +8,7 @@ export default function SzamlaManager({ szamlak, onCreate, onRemove }) {
   }
 
   return (
-    <section className="flottaSzamlaSzamlalo">
+    <section className="flottaSzamlaManager">
       <button onClick={onPlus}> + </button>
       <button onClick={onMinus}> - </button>
     </section>

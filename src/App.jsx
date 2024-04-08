@@ -66,24 +66,32 @@ function App() {
   }
 
   return (
-    <>
-      <SzamlaManager
-        onCreate={() => szamlaUpdater('add')}
-        onRemove={(key) => szamlaUpdater('remove')}
-        szamlak={szamlak}
-      />
-
-      {szamlak.map((szamla) => (
-        <SzamlaElement
-          onFileSelect={printFile}
-          id={szamla.id}
-          key={szamla.id}
-          title={szamla.id}
+    <div className="flottaSzamla">
+      
+      <header className="flottaSzamlaHeader">
+        <SzamlaManager
+          onCreate={() => szamlaUpdater('add')}
+          onRemove={(key) => szamlaUpdater('remove')}
+          szamlak={szamlak}
         />
-      ))}
+        <SzamlaOsszesito szamlak={szamlak} />
+      </header>
 
-      <SzamlaOsszesito szamlak={szamlak} />
-    </>
+
+    
+      <main className="flottaSzamlaBlock">
+        {szamlak.map((szamla) => (
+          
+          <SzamlaElement
+            onFileSelect={printFile}
+            id={szamla.id}
+            key={szamla.id}
+            title={szamla.id}
+          />
+        ))}
+      </main>
+
+    </div>
   );
 }
 
