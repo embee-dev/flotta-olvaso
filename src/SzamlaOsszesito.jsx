@@ -6,7 +6,7 @@ export default function SzamlaOsszesito({ szamlak }) {
   let sorszamok = szamlak.map((i) => i.sorszam).sort();
 
   return (
-    <section className="flottaSzamlaEredmeny">
+    <section className="flottaSzamlaOsszesito">
       {vegosszeg > 0 && (
         <>
           <p>{`Végösszeg: ${vegosszeg} (${osszegek

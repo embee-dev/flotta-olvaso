@@ -1,8 +1,3 @@
-// @TODO:
-// - CSS formatting
-// - Copy to Clipboard button next to labels
-// - error handling
-
 import * as PDFJS from 'pdfjs-dist/build/pdf';
 import * as pdfjsWorker from 'pdfjs-dist/build/pdf.worker';
 window.PDFJS = PDFJS;
@@ -12,6 +7,8 @@ import { useImmer } from 'use-immer';
 import SzamlaElement from './SzamlaElement.jsx';
 import SzamlaManager from './SzamlaManager.jsx';
 import SzamlaOsszesito from './SzamlaOsszesito.jsx';
+
+import './App.css';
 
 const szamlakSzama = 2;
 const szamlaInterFace = {
@@ -69,24 +66,32 @@ function App() {
   }
 
   return (
-    <>
-      <SzamlaManager
-        onCreate={() => szamlaUpdater('add')}
-        onRemove={(key) => szamlaUpdater('remove')}
-        szamlak={szamlak}
-      />
-
-      {szamlak.map((szamla) => (
-        <SzamlaElement
-          onFileSelect={printFile}
-          id={szamla.id}
-          key={szamla.id}
-          title={szamla.id}
+    <div className="flottaSzamla">
+      
+      <header className="flottaSzamlaHeader">
+        <SzamlaManager
+          onCreate={() => szamlaUpdater('add')}
+          onRemove={(key) => szamlaUpdater('remove')}
+          szamlak={szamlak}
         />
-      ))}
+        <SzamlaOsszesito szamlak={szamlak} />
+      </header>
 
-      <SzamlaOsszesito szamlak={szamlak} />
-    </>
+
+    
+      <main className="flottaSzamlaBlock">
+        {szamlak.map((szamla) => (
+          
+          <SzamlaElement
+            onFileSelect={printFile}
+            id={szamla.id}
+            key={szamla.id}
+            title={szamla.id}
+          />
+        ))}
+      </main>
+
+    </div>
   );
 }
 
