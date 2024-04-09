@@ -2,8 +2,13 @@ export default function SzamlaElement({ id, title, onFileSelect }) {
   const inputId = `file-${id}`;
 
   function handleFileSelect(e) {
-    const uploadedFile = URL.createObjectURL(e.target.files[0]);
-    onFileSelect(uploadedFile, id);
+    if (!e.target.files.length) {
+      alert(`No file selected, please try again!`);
+      return;
+    }
+    const uploadedFile = URL.createObjectURL(e.target?.files[0]);
+    const originalFileName = e.target?.files[0]?.name;
+    onFileSelect(uploadedFile, originalFileName, id);
   }
 
   return (
