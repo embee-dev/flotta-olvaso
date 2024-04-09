@@ -8,8 +8,8 @@ export default function SzamlaElement({ id, title, onFileSelect }) {
 
   return (
     <article className="flottaSzamlaElement">
-      <header className="flottaSzamlaHeader">Flotta Számla: {title}</header>
-      <section className="flottaSzamlaContent">
+      <header className="flottaSzamlaElement-header">Flotta Számla: {title}</header>
+      <section className="flottaSzamlaElement-content">
         <label htmlFor={inputId}>PDF fájl:</label>
         <input
           id={inputId}
