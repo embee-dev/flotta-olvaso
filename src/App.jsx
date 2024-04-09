@@ -44,11 +44,18 @@ function App() {
     }
   }
 
-  function printFile(fileName, key) {
+  function printFile(fileBlob, fileName, key) {
     (async function () {
-      let doc = await PDFJS.getDocument(fileName).promise;
-      let pageTexts = '';
+      let doc, pageTexts = '';
       let sorszam, vegosszeg;
+
+      try {
+        doc = await PDFJS.getDocument(fileBlob).promise;  
+      } catch (error) {
+        console.error(error);
+        return;
+      }
+
       for (let i = 1; i <= doc.numPages; i++) {
         pageTexts += (await (await doc.getPage(i)).getTextContent()).items
           .map((i) => i.str)
@@ -57,11 +64,15 @@ function App() {
       sorszam = pageTexts.match(regs.sorszam)?.[1].replace('-', '');
       vegosszeg = Number(pageTexts.match(regs.vegosszeg)?.[1].replace(' ', ''));
 
-      updateSzamlak((draft) => {
-        const szamla = draft.find((a) => a.id === key);
-        szamla.vegosszeg = vegosszeg;
-        szamla.sorszam = sorszam;
-      });
+      if (sorszam && vegosszeg) {
+        updateSzamlak((draft) => {
+          const szamla = draft.find((a) => a.id === key);
+          szamla.vegosszeg = vegosszeg;
+          szamla.sorszam = sorszam;
+        });
+      } else {
+        alert(`Could not extract data from PDF file: "${fileName}"\nSelect another file!`);
+      }
     })();
   }
 
