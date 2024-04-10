@@ -10,7 +10,9 @@ import SzamlaOsszesito from './SzamlaOsszesito.jsx';
 
 import './App.css';
 
-const szamlakSzama = 2;
+const szamlakSzama = localStorage.getItem('szamlakSzama') ?? 2;
+const szamlakSzamaLimit = 5;
+
 const szamlaInterFace = {
   sorszam: '',
   vegosszeg: 0,
@@ -33,14 +35,20 @@ function App() {
     vegosszeg: /Bruttó végösszeg:\s+([0-9- ]+)\s+/,
   };
 
+  function storeSzamlakSzama(szamlakSzama) {
+    localStorage.setItem('szamlakSzama', szamlakSzama);
+  }
+
   function szamlaUpdater(operation = 'add') {
     if (operation === 'add') {
       updateSzamlak((draft) => {
         draft.push(createBlankSzamla());
+        storeSzamlakSzama(draft.length);
       });
     } else if (operation === 'remove') {
       updateSzamlak((draft) => {
         draft.pop();
+        storeSzamlakSzama(draft.length);
       });
     }
   }
