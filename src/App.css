@@ -29,3 +29,46 @@ body {
     flex-grow: 1;
     flex-shrink: 0;
 }
+
+.flottaSzamlaElement {
+}
+.flottaSzamlaElement-invalid {
+    .flottaSzamlaElement-filename {
+        color: red;
+        text-decoration: line-through;
+    }
+}
+.flottaSzamlaElement-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.flottaSzamlaElement-hidden {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+}
+.flottaSzamlaElement-hidden:is(:focus, :focus-within) + .flottaSzamlaElement-label {
+    outline: thin dotted;
+}
+
+.flottaButton {
+    display: inline-flex;
+    gap: 4px;
+    border: solid 1px #777;
+    border-radius: 2px;
+    padding: 2px 8px;
+    --brightness: 90%;
+    background-color: hsl(0, 0%, var(--brightness));
+    transition: background-color 200ms;
+    cursor: pointer;
+}
+.flottaButton:hover {
+    --brightness: 80%;
+}
+.flottaIcon {
+    display: inline-block;
+    width: 16px;
+}
