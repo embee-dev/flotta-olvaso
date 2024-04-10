@@ -9,8 +9,8 @@ export default function SzamlaManager({ szamlak, onCreate, onRemove }) {
 
   return (
     <section className="flottaSzamlaManager">
-      <button onClick={onPlus}> + </button>
-      <button onClick={onMinus}> - </button>
+      {szamlak.length < 5 ? <button onClick={onPlus}> + </button> : ''}
+      {szamlak.length >= 2 ? <button onClick={onMinus}> - </button> : ''}
     </section>
   );
 }
