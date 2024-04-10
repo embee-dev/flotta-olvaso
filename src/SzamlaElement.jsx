@@ -1,4 +1,10 @@
-export default function SzamlaElement({ id, title, onFileSelect }) {
+import copyIcon from '/icons/icon-copy.svg';
+import uploadIcon from '/icons/icon-upload.svg';
+
+import { useState } from 'react';
+
+export default function SzamlaElement({ id, title, isInvalid, onFileSelect }) {
+  const [fileName, setFileName] = useState(null);
   const inputId = `file-${id}`;
 
   function handleFileSelect(e) {
@@ -7,21 +13,26 @@ export default function SzamlaElement({ id, title, onFileSelect }) {
       return;
     }
     const uploadedFile = URL.createObjectURL(e.target?.files[0]);
-    const originalFileName = e.target?.files[0]?.name;
-    onFileSelect(uploadedFile, originalFileName, id);
+    setFileName(e.target?.files[0]?.name);
+    onFileSelect(uploadedFile, fileName, id);
   }
 
   return (
-    <article className="flottaSzamlaElement">
+    <article className={`flottaSzamlaElement${isInvalid ? ' flottaSzamlaElement-invalid' : ''}`}>
       <header className="flottaSzamlaElement-header">Flotta Számla: {title}</header>
       <section className="flottaSzamlaElement-content">
-        <label htmlFor={inputId}>PDF fájl:</label>
-        <input
-          id={inputId}
-          type="file"
-          accept=".pdf"
-          onChange={handleFileSelect}
-        />
+        {isInvalid}
+      <input
+            id={inputId}
+            className="flottaSzamlaElement-hidden"
+            type="file"
+            accept=".pdf"
+            onChange={handleFileSelect}
+          />
+        <label className="flottaSzamlaElement-label flottaButton" htmlFor={inputId}>
+          <img className="flottaIcon" src={uploadIcon} alt="Feltöltés" title="Feltöltés" />Számla PDF feltöltése
+        </label>
+        {fileName && <span className="flottaSzamlaElement-filename">{fileName}</span>}
       </section>
     </article>
   );

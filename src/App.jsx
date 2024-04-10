@@ -14,6 +14,7 @@ const szamlakSzama = 2;
 const szamlaInterFace = {
   sorszam: '',
   vegosszeg: 0,
+  invalid: false
 };
 const szamlaElemek = Array.from({ length: szamlakSzama }, (v, i) => {
   return createBlankSzamla();
@@ -67,11 +68,18 @@ function App() {
       if (sorszam && vegosszeg) {
         updateSzamlak((draft) => {
           const szamla = draft.find((a) => a.id === key);
+          szamla.invalid = false;
           szamla.vegosszeg = vegosszeg;
           szamla.sorszam = sorszam;
         });
       } else {
         alert(`Could not extract data from PDF file: "${fileName}"\nSelect another file!`);
+        updateSzamlak((draft) => {
+          const szamla = draft.find((a) => a.id === key);
+          szamla.invalid = true;
+          szamla.vegosszeg = szamlaInterFace.vegosszeg;
+          szamla.sorszam = szamlaInterFace.sorszam;
+        });
       }
     })();
   }
@@ -97,6 +105,7 @@ function App() {
             onFileSelect={printFile}
             id={szamla.id}
             key={szamla.id}
+            isInvalid={szamla.invalid}
             title={szamla.id}
           />
         ))}
