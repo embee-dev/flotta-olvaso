@@ -24,7 +24,7 @@ const szamlaElemek = Array.from({ length: szamlakSzama }, (v, i) => {
 console.log(szamlaElemek);
 
 function createBlankSzamla() {
-  return { ...szamlaInterFace, id: self.crypto.randomUUID() };
+  return { ...szamlaInterFace, id: crypto.getRandomValues(new Uint32Array(1))?.[0] };
 }
 
 function App() {
