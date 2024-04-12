@@ -39,16 +39,17 @@ function App() {
     localStorage.setItem('szamlakSzama', szamlakSzama);
   }
 
-  function szamlaUpdater(operation = 'add') {
+  function szamlaUpdater(operation = 'add', key = null) {
     if (operation === 'add') {
       updateSzamlak((draft) => {
         draft.push(createBlankSzamla());
         storeSzamlakSzama(draft.length);
       });
-    } else if (operation === 'remove') {
+    } else if (operation === 'remove' && key) {
       updateSzamlak((draft) => {
-        draft.pop();
+        draft = draft.filter(a => a.id !== key);
         storeSzamlakSzama(draft.length);
+        return draft;
       });
     }
   }
@@ -96,27 +97,32 @@ function App() {
     <div className="flottaSzamla">
       
       <header className="flottaSzamlaHeader">
-        <SzamlaManager
-          onCreate={() => szamlaUpdater('add')}
-          onRemove={(key) => szamlaUpdater('remove')}
-          szamlak={szamlak}
-        />
-        <SzamlaOsszesito szamlak={szamlak} />
+        <h1 className="flottaSzamlaTitle">Flotta Számla feldolgozó</h1>        
       </header>
 
 
     
-      <main className="flottaSzamlaBlock">
+      <main className="flottaSzamlaMain">
+
         {szamlak.map((szamla) => (
           
           <SzamlaElement
             onFileSelect={printFile}
+            canBeRemoved={szamlak.length > 1 ? true : false}
+            onRemove={key => szamlaUpdater('remove', key)}
             id={szamla.id}
             key={szamla.id}
             isInvalid={szamla.invalid}
             title={szamla.id}
           />
         ))}
+                
+        <SzamlaManager
+          onCreate={() => szamlaUpdater('add')}
+          szamlak={szamlak}
+        />
+
+        <SzamlaOsszesito szamlak={szamlak} />        
       </main>
 
     </div>

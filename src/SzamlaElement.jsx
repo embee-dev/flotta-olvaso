@@ -3,7 +3,7 @@ import uploadIcon from '/icons/icon-upload.svg';
 
 import { useState } from 'react';
 
-export default function SzamlaElement({ id, title, isInvalid, onFileSelect }) {
+export default function SzamlaElement({ id, title, isInvalid, onFileSelect, canBeRemoved, onRemove }) {
   const [fileName, setFileName] = useState(null);
   const inputId = `file-${id}`;
 
@@ -15,6 +15,10 @@ export default function SzamlaElement({ id, title, isInvalid, onFileSelect }) {
     const uploadedFile = URL.createObjectURL(e.target?.files[0]);
     setFileName(e.target?.files[0]?.name);
     onFileSelect(uploadedFile, fileName, id);
+  }
+
+  function onMinus() {
+    onRemove(id);
   }
 
   return (
@@ -33,6 +37,7 @@ export default function SzamlaElement({ id, title, isInvalid, onFileSelect }) {
           <img className="flottaIcon" src={uploadIcon} alt="Feltöltés" title="Feltöltés" />Számla PDF feltöltése
         </label>
         {fileName && <span className="flottaSzamlaElement-filename">{fileName}</span>}
+        {canBeRemoved && <button onClick={onMinus}> - </button>}
       </section>
     </article>
   );
