@@ -3,7 +3,7 @@ import uploadIcon from '/icons/icon-upload.svg';
 
 import { useState } from 'react';
 
-export default function SzamlaElement({ id, title, isInvalid, onFileSelect, canBeRemoved, onRemove }) {
+export default function SzamlaElement({ id, title, sorszam, osszeg, isInvalid, onFileSelect, canBeRemoved, onRemove }) {
   const [fileName, setFileName] = useState(null);
   const inputId = `file-${id}`;
 
@@ -22,23 +22,27 @@ export default function SzamlaElement({ id, title, isInvalid, onFileSelect, canB
   }
 
   return (
-    <article className={`flottaSzamlaElement${isInvalid ? ' flottaSzamlaElement-invalid' : ''}`}>
-      <header className="flottaSzamlaElement-header">Flotta Számla: {title}</header>
-      <section className="flottaSzamlaElement-content">
-        {isInvalid}
-      <input
-            id={inputId}
-            className="flottaSzamlaElement-hidden"
-            type="file"
-            accept=".pdf"
-            onChange={handleFileSelect}
-          />
-        <label className="flottaSzamlaElement-label flottaButton" htmlFor={inputId}>
-          <img className="flottaIcon" src={uploadIcon} alt="Feltöltés" title="Feltöltés" />Számla PDF feltöltése
-        </label>
-        {fileName && <span className="flottaSzamlaElement-filename">{fileName}</span>}
-        {canBeRemoved && <button onClick={onMinus}> - </button>}
-      </section>
-    </article>
+    <section className={`flottaSzamlaElement${isInvalid ? ' flottaSzamlaElement-invalid' : ''}${(fileName && !isInvalid) ? ' flottaSzamlaElement-valid' : ''}`}>
+      <fieldset className="flottaSzamlaElement-content">
+        {canBeRemoved && <label className="flottaButton-fieldset" onClick={onMinus}>-</label>}
+        <legend title={title}>Flotta Számla</legend>
+        <div className="flottaSzamlaElement-text">
+          {fileName && <div className="flottaSzamlaElement-filename">{fileName}</div>}
+          {(sorszam && osszeg) && <div className="flottaSzamlaElement-summary">Sorszám: {sorszam}, Összeg: {osszeg}</div>}
+        </div>
+        <div className="flottaSzamlaElement-buttons">
+          <input
+                id={inputId}
+                className="flottaSzamlaElement-hidden"
+                type="file"
+                accept=".pdf"
+                onChange={handleFileSelect}
+              />
+          <label className="flottaSzamlaElement-label flottaButton" htmlFor={inputId}>
+            <img className="flottaIcon" src={uploadIcon} alt="Feltöltés" title="Feltöltés" />Számla PDF feltöltése
+          </label>  
+        </div>
+      </fieldset>
+    </section>
   );
 }

@@ -112,6 +112,8 @@ function App() {
             onRemove={key => szamlaUpdater('remove', key)}
             id={szamla.id}
             key={szamla.id}
+            sorszam={szamla.sorszam}
+            osszeg={szamla.vegosszeg}
             isInvalid={szamla.invalid}
             title={szamla.id}
           />
