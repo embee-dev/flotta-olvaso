@@ -1,7 +1,7 @@
 @import url('reset.css');
 
 body {
-    background-color: #ccc;
+    background-color: #bbb;
     font-family: "Lucida Console", monospace;
 }
 
@@ -22,6 +22,8 @@ body {
 }
 
 .flottaSzamlaManager {
+}
+.flottaSzamlaManager-add {
 }
 
 .flottaSzamlaOsszesito {
@@ -83,8 +85,10 @@ body {
     box-shadow: 10px 10px black;
     color: black;
     --brightness: 90%;
+    --transition-time: 200ms;
     background-color: hsl(0, 0%, var(--brightness));
-    transition: all 200ms;
+    transition: background-color var(--transition-time),
+        color var(--transition-time);
     cursor: pointer;
 }
 .flottaButton:hover {
@@ -99,6 +103,10 @@ body {
 }
 .flottaButton-fieldset::before { content: '['; }
 .flottaButton-fieldset::after { content: ']'; }
+
+.flottaButton:active, .flottaButton-fieldset:active {
+    transform: translate(1px, 1px);
+}
 
 
 .flottaIcon {

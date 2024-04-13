@@ -1,4 +1,5 @@
-import SzamlaCopyButton from './SzamlaCopyButton.jsx';
+import SzamlaButton from './SzamlaButton.jsx';
+import copyIcon from '/icons/icon-copy.svg';
 
 export default function SzamlaOsszesito({ szamlak }) {
   let vegosszeg = szamlak.reduce((a, v) => {
@@ -27,11 +28,11 @@ export default function SzamlaOsszesito({ szamlak }) {
           <p>Végösszeg: <span id="vegosszeg">{vegosszeg}</span> ({osszegek
             .filter((i) => i > 0)
             .join(' + ')})</p>
-            <SzamlaCopyButton tooltip="Végösszeg" onClick={() => copyText('vegosszeg')}></SzamlaCopyButton>
+            <SzamlaButton icon={copyIcon} text="Másolás" tooltip="Végösszeg vágólapra másolása" onClick={() => copyText('vegosszeg')}></SzamlaButton>
           <pre>Sorszámok: <span id="sorszamok">{sorszamok
             .filter((i) => i.length > 0)
             .join(', ')}</span></pre>
-            <SzamlaCopyButton tooltip="Sorszámok" onClick={() => copyText('sorszamok')}></SzamlaCopyButton>
+            <SzamlaButton icon={copyIcon} text="Másolás" tooltip="Sorszámok vágólapra másolása" onClick={() => copyText('sorszamok')}></SzamlaButton>
         </>
       )}
     </section>

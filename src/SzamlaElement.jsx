@@ -1,5 +1,5 @@
-import copyIcon from '/icons/icon-copy.svg';
 import uploadIcon from '/icons/icon-upload.svg';
+import SzamlaButton from './SzamlaButton.jsx';
 
 import { useState } from 'react';
 
@@ -38,9 +38,13 @@ export default function SzamlaElement({ id, title, sorszam, osszeg, isInvalid, o
                 accept=".pdf"
                 onChange={handleFileSelect}
               />
-          <label className="flottaSzamlaElement-label flottaButton" htmlFor={inputId}>
-            <img className="flottaIcon" src={uploadIcon} alt="Feltöltés" title="Feltöltés" />Számla PDF feltöltése
-          </label>  
+
+          <SzamlaButton 
+            className="flottaSzamlaElement-label"
+            htmlFor={inputId}
+            icon={uploadIcon}
+            title="Feltöltés"
+            text="Számla PDF feltöltése"></SzamlaButton>
         </div>
       </fieldset>
     </section>
