@@ -82,7 +82,6 @@ function App() {
           szamla.sorszam = sorszam;
         });
       } else {
-        alert(`Could not extract data from PDF file: "${fileName}"\nSelect another file!`);
         updateSzamlak((draft) => {
           const szamla = draft.find((a) => a.id === key);
           szamla.invalid = true;

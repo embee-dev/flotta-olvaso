@@ -9,12 +9,11 @@ export default function SzamlaElement({ id, title, sorszam, osszeg, isInvalid, o
 
   function handleFileSelect(e) {
     if (!e.target.files.length) {
-      alert(`No file selected, please try again!`);
       return;
     }
     const uploadedFile = URL.createObjectURL(e.target?.files[0]);
     setFileName(e.target?.files[0]?.name);
-    onFileSelect(uploadedFile, fileName, id);
+    onFileSelect(uploadedFile, e.target?.files[0]?.name, id);
   }
 
   function onMinus() {
