@@ -9,10 +9,13 @@ export default function SzamlaOsszesito({ szamlak }) {
   let sorszamok = szamlak.map((i) => i.sorszam).sort();
 
   function copyText(itemToCopy) {
-    let textToCopy = document.getElementById(itemToCopy)?.innerText;
+    const item = document.getElementById(itemToCopy);
+    const textToCopy = item?.value;
     if (!textToCopy) return;
     (async () => {
       try {
+        item.focus();
+        item.select();
         await navigator.clipboard.writeText(textToCopy);
         console.info(`${textToCopy} copied!`);
       } catch (error) {
@@ -26,18 +29,22 @@ export default function SzamlaOsszesito({ szamlak }) {
     {vegosszeg > 0 && (
       <section className="flottaSzamlaOsszesito">
         <div className="flottaSzamlaOsszesito-block">
-          <div className="flottaSzamlaOsszesito-label">Végösszeg</div>
-          <div className="flottaSzamlaOsszesito-value" id="vegosszeg" title={osszegek
+          <label htmlFor="vegosszeg" className="flottaSzamlaOsszesito-label">Végösszeg</label>
+          <input type="text" className="flottaSzamlaOsszesito-value" id="vegosszeg"
+          onFocus={(e) => e.target.select() }
+          title={osszegek
             .filter((i) => i > 0)
-            .join(' + ')}>{vegosszeg}</div>
+            .join(' + ')} readOnly value={vegosszeg} />
           <SzamlaButton className="flottaSzamlaOsszesito-copy" icon={copyIcon} text="Másolás" tooltip="Végösszeg vágólapra másolása" onClick={() => copyText('vegosszeg')}></SzamlaButton>
         </div>
             
         <div className="flottaSzamlaOsszesito-block">
-          <div className="flottaSzamlaOsszesito-label">Sorszámok</div>
-          <div className="flottaSzamlaOsszesito-value" id="sorszamok">{sorszamok
+          <label htmlFor="sorszamok" className="flottaSzamlaOsszesito-label">Sorszámok</label>
+          <input type="text" className="flottaSzamlaOsszesito-value" id="sorszamok"
+          onFocus={(e) => e.target.select() }
+            readOnly value={sorszamok
             .filter((i) => i.length > 0)
-            .join(', ')}</div>
+            .join(', ')} />
           <SzamlaButton className="flottaSzamlaOsszesito-copy" icon={copyIcon} text="Másolás" tooltip="Sorszámok vágólapra másolása" onClick={() => copyText('sorszamok')}></SzamlaButton>
         </div>
       </section>
