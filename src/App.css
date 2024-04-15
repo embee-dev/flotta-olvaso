@@ -1,45 +1,90 @@
 @import url('reset.css');
 
 body {
-    background-color: #ccc;
-    font-family: Arial, sans-serif;
+    background-color: #bbb;
+    font-family: "Lucida Console", monospace;
+}
+#root {
+    display: grid;
+    padding: 1rem 1rem 2rem;
 }
 
 .flottaSzamla {
-    margin: 0 auto;
-    max-width: 600px;
+    justify-self: center;
 }
 
 .flottaSzamlaMain {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 2rem;
 }
 
 .flottaSzamlaHeader {
+    h1 {
+        margin-block-end: 0.25em;
+    }
 }
 .flottaSzamlaTitle {
 }
 
 .flottaSzamlaManager {
 }
+.flottaSzamlaManager-add {
+}
 
 .flottaSzamlaOsszesito {
+    display: grid;
+    gap: 2rem;
+}
+.flottaSzamlaOsszesito-block {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    row-gap: 0.5rem;
 
+    .flottaSzamlaOsszesito-label {
+        padding-right: .5em;
+    }
+    .flottaSzamlaOsszesito-label:after {
+        content: ':';
+    }
+
+    .flottaSzamlaOsszesito-value {
+        justify-self: stretch;
+        text-align: right;
+        background-color: #ccc;
+        font-style: italic;
+        padding-right: .5em;
+    }
+    .flottaSzamlaOsszesito-copy {
+        grid-column: span 2;
+        justify-self: end;
+    }
 }
 
 .flottaSzamlaElement {
+    position: relative;
+    --dialogbg: rgb(0, 0, 168);
+    background-color: var(--dialogbg);
+    padding: 0 3px 6px;
+    box-shadow: 10px 10px black;
+    color: white;
 }
 .flottaSzamlaElement-invalid {
+    --dialogbg: red;
+
     .flottaSzamlaElement-filename {
-        color: red;
         text-decoration: line-through;
     }
 }
+.flottaSzamlaElement-valid {
+    --dialogbg: green;
+}
 .flottaSzamlaElement-content {
-    display: flex;
-    align-items: center;
+    background-color: inherit;
+    display: grid;
     gap: 10px;
+    border: 6px white double;
+    padding: 0.75rem;
 }
 .flottaSzamlaElement-hidden {
     position: absolute !important;
@@ -48,24 +93,53 @@ body {
     overflow: hidden;
     clip: rect(1px, 1px, 1px, 1px);
 }
-.flottaSzamlaElement-hidden:is(:focus, :focus-within) + .flottaSzamlaElement-label {
-    outline: thin dotted;
+.flottaSzamlaElement-hidden:is(:focus, :focus-within) + .flottaButton {
+    color: white;
+    --brightness: 80%;
+}
+
+.flottaSzamlaElement-text:not(:empty) {
+    padding-bottom: 0.75rem;
+    border-bottom: solid 2px #ffffff;
+}
+
+.flottaSzamlaElement-filename {
+}
+
+.flottaSzamlaElement-buttons {
 }
 
 .flottaButton {
     display: inline-flex;
     gap: 4px;
-    border: solid 1px #777;
-    border-radius: 2px;
-    padding: 2px 8px;
+    padding: 1px 10px;
+    box-shadow: 10px 10px black;
+    color: black;
     --brightness: 90%;
+    --transition-time: 200ms;
     background-color: hsl(0, 0%, var(--brightness));
-    transition: background-color 200ms;
+    transition: background-color var(--transition-time),
+        color var(--transition-time);
     cursor: pointer;
 }
 .flottaButton:hover {
     --brightness: 80%;
 }
+.flottaButton-fieldset {
+    position: absolute;
+    background-color: inherit;
+    top: 0;
+    right: 1rem;
+    cursor: pointer;
+}
+.flottaButton-fieldset::before { content: '['; }
+.flottaButton-fieldset::after { content: ']'; }
+
+.flottaButton:active, .flottaButton-fieldset:active {
+    transform: translate(1px, 1px);
+}
+
+
 .flottaIcon {
     display: inline-block;
     width: 16px;

@@ -1,4 +1,5 @@
-import SzamlaCopyButton from './SzamlaCopyButton.jsx';
+import SzamlaButton from './SzamlaButton.jsx';
+import copyIcon from '/icons/icon-copy.svg';
 
 export default function SzamlaOsszesito({ szamlak }) {
   let vegosszeg = szamlak.reduce((a, v) => {
@@ -8,7 +9,7 @@ export default function SzamlaOsszesito({ szamlak }) {
   let sorszamok = szamlak.map((i) => i.sorszam).sort();
 
   function copyText(itemToCopy) {
-    let textToCopy = document.querySelector(`#${itemToCopy}`)?.innerText;
+    let textToCopy = document.getElementById(itemToCopy)?.innerText;
     if (!textToCopy) return;
     (async () => {
       try {
@@ -21,19 +22,26 @@ export default function SzamlaOsszesito({ szamlak }) {
   }
 
   return (
-    <section className="flottaSzamlaOsszesito">
-      {vegosszeg > 0 && (
-        <>
-          <p>Végösszeg: <span id="vegosszeg">{vegosszeg}</span> ({osszegek
+    <>
+    {vegosszeg > 0 && (
+      <section className="flottaSzamlaOsszesito">
+        <div className="flottaSzamlaOsszesito-block">
+          <div className="flottaSzamlaOsszesito-label">Végösszeg</div>
+          <div className="flottaSzamlaOsszesito-value" id="vegosszeg" title={osszegek
             .filter((i) => i > 0)
-            .join(' + ')})</p>
-            <SzamlaCopyButton tooltip="Végösszeg" onClick={() => copyText('vegosszeg')}></SzamlaCopyButton>
-          <pre>Sorszámok: <span id="sorszamok">{sorszamok
+            .join(' + ')}>{vegosszeg}</div>
+          <SzamlaButton className="flottaSzamlaOsszesito-copy" icon={copyIcon} text="Másolás" tooltip="Végösszeg vágólapra másolása" onClick={() => copyText('vegosszeg')}></SzamlaButton>
+        </div>
+            
+        <div className="flottaSzamlaOsszesito-block">
+          <div className="flottaSzamlaOsszesito-label">Sorszámok</div>
+          <div className="flottaSzamlaOsszesito-value" id="sorszamok">{sorszamok
             .filter((i) => i.length > 0)
-            .join(', ')}</span></pre>
-            <SzamlaCopyButton tooltip="Sorszámok" onClick={() => copyText('sorszamok')}></SzamlaCopyButton>
-        </>
-      )}
-    </section>
+            .join(', ')}</div>
+          <SzamlaButton className="flottaSzamlaOsszesito-copy" icon={copyIcon} text="Másolás" tooltip="Sorszámok vágólapra másolása" onClick={() => copyText('sorszamok')}></SzamlaButton>
+        </div>
+      </section>
+    )}
+    </>
   );
 }
