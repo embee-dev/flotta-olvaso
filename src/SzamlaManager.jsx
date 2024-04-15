@@ -6,8 +6,12 @@ export default function SzamlaManager({ szamlak, onCreate }) {
   }
 
   return (
-    <section className="flottaSzamlaManager">
-      {szamlak.length < 5 ? <SzamlaButton className="flottaSzamlaManager-add" text="+ Új számla hozzáadása" onClick={onPlus}></SzamlaButton>: ''}
-    </section>
+    <>
+      {szamlak.length < 5 && 
+        <section className="flottaSzamlaManager">
+          <SzamlaButton className="flottaSzamlaManager-add" text="+ Új számla hozzáadása" onClick={onPlus}></SzamlaButton>
+        </section>
+      }
+    </>
   );
 }
