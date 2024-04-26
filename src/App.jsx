@@ -18,7 +18,7 @@ const szamlaInterFace = {
   vegosszeg: 0,
   invalid: false
 };
-const szamlaElemek = Array.from({ length: szamlakSzama }, (v, i) => {
+const szamlaElemek = Array.from({ length: szamlakSzama }, () => {
   return createBlankSzamla();
 });
 console.log(szamlaElemek);
@@ -121,6 +121,7 @@ function App() {
         <SzamlaManager
           onCreate={() => szamlaUpdater('add')}
           szamlak={szamlak}
+          szamlakSzamaLimit={szamlakSzamaLimit}
         />
 
         <SzamlaOsszesito szamlak={szamlak} />        
