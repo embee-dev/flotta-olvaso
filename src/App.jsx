@@ -51,6 +51,13 @@ function App() {
         storeSzamlakSzama(draft.length);
         return draft;
       });
+    } else if (operation === 'markinvalid' && key) {
+      updateSzamlak((draft) => {
+        const szamla = draft.find((a) => a.id === key);
+        szamla.invalid = true;
+        szamla.vegosszeg = szamlaInterFace.vegosszeg;
+        szamla.sorszam = szamlaInterFace.sorszam;
+      });
     }
   }
 
@@ -75,19 +82,19 @@ function App() {
       vegosszeg = Number(pageTexts.match(regs.vegosszeg)?.[1].replace(' ', ''));
 
       if (sorszam && vegosszeg) {
-        updateSzamlak((draft) => {
-          const szamla = draft.find((a) => a.id === key);
-          szamla.invalid = false;
-          szamla.vegosszeg = vegosszeg;
-          szamla.sorszam = sorszam;
-        });
+        let duplicateSzamla = szamlak.find(szamla => szamla.sorszam === sorszam);
+        if (duplicateSzamla && !confirm('Ezzel a sorszámmal már van feltöltött számla.\nFolytassuk?')) {
+          szamlaUpdater('markinvalid', key);
+        } else {
+          updateSzamlak((draft) => {
+            const szamla = draft.find((a) => a.id === key);
+            szamla.invalid = false;
+            szamla.vegosszeg = vegosszeg;
+            szamla.sorszam = sorszam;
+          });
+        }
       } else {
-        updateSzamlak((draft) => {
-          const szamla = draft.find((a) => a.id === key);
-          szamla.invalid = true;
-          szamla.vegosszeg = szamlaInterFace.vegosszeg;
-          szamla.sorszam = szamlaInterFace.sorszam;
-        });
+        szamlaUpdater('markinvalid', key);
       }
     })();
   }
