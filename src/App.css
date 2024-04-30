@@ -26,13 +26,6 @@ body {
         margin-block-end: 0.25em;
     }
 }
-.flottaSzamlaTitle {
-}
-
-.flottaSzamlaManager {
-}
-.flottaSzamlaManager-add {
-}
 
 .flottaSzamlaOsszesito {
     display: grid;
@@ -115,9 +108,7 @@ body {
 }
 
 .flottaSzamlaElement-filename {
-}
-
-.flottaSzamlaElement-buttons {
+    overflow-wrap: anywhere;
 }
 
 .flottaButton {
