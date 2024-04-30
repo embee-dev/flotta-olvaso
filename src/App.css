@@ -73,6 +73,9 @@ body {
     box-shadow: 10px 10px black;
     color: white;
 }
+.flottaSzamlaElement-processing {
+    --dialogbg: silver;
+}
 .flottaSzamlaElement-invalid {
     --dialogbg: red;
 
@@ -109,6 +112,12 @@ body {
 
 .flottaSzamlaElement-filename {
     overflow-wrap: anywhere;
+}
+.flottaSzamlaElement-process {
+    .flottaIcon {
+        aspect-ratio: 1;
+        margin-inline-end: .25em;
+    }
 }
 
 .flottaButton {
