@@ -5,6 +5,7 @@ body {
     font-family: "Lucida Console", monospace;
 
     --transition-time: 200ms;
+    --feedback-time: 600ms;
 }
 #root {
     display: grid;
@@ -131,9 +132,19 @@ body {
     transition: background-color var(--transition-time),
         color var(--transition-time);
     cursor: pointer;
+
+    .flottaIcon {
+        opacity: 1;
+        transition: opacity var(--feedback-time);
+    }
 }
 .flottaButton:hover {
     --brightness: 80%;
+}
+.flottaButton-feedback {
+    .flottaIcon {
+        opacity: 0;
+    }
 }
 .flottaButton-fieldset {
     position: absolute;

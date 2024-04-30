@@ -1,5 +1,6 @@
 import SzamlaButton from './SzamlaButton.jsx';
 import copyIcon from '/icons/icon-copy.svg';
+import checkmarkIcon from '/icons/icon-checkmark.svg';
 
 export default function SzamlaOsszesito({ szamlak }) {
   let vegosszeg = szamlak.reduce((a, v) => {
@@ -35,7 +36,7 @@ export default function SzamlaOsszesito({ szamlak }) {
           title={osszegek
             .filter((i) => i > 0)
             .join(' + ')} readOnly value={vegosszeg} />
-          <SzamlaButton className="flottaSzamlaOsszesito-copy" icon={copyIcon} text="Másolás" tooltip="Végösszeg vágólapra másolása" onClick={() => copyText('vegosszeg')}></SzamlaButton>
+          <SzamlaButton className="flottaSzamlaOsszesito-copy" icon={copyIcon} feedbackIcon={checkmarkIcon} text="Másolás" tooltip="Végösszeg vágólapra másolása" onClick={() => copyText('vegosszeg')}></SzamlaButton>
         </div>
             
         <div className="flottaSzamlaOsszesito-block">
@@ -45,7 +46,7 @@ export default function SzamlaOsszesito({ szamlak }) {
             readOnly value={sorszamok
             .filter((i) => i.length > 0)
             .join(', ')} />
-          <SzamlaButton className="flottaSzamlaOsszesito-copy" icon={copyIcon} text="Másolás" tooltip="Sorszámok vágólapra másolása" onClick={() => copyText('sorszamok')}></SzamlaButton>
+          <SzamlaButton className="flottaSzamlaOsszesito-copy" icon={copyIcon} feedbackIcon={checkmarkIcon} text="Másolás" tooltip="Sorszámok vágólapra másolása" onClick={() => copyText('sorszamok')}></SzamlaButton>
         </div>
       </section>
     )}
