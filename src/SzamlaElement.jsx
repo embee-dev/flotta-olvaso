@@ -11,9 +11,13 @@ export default function SzamlaElement({ id, title, sorszam, osszeg, isInvalid, o
     if (!e.target.files.length) {
       return;
     }
-    const uploadedFile = URL.createObjectURL(e.target?.files[0]);
-    setFileName(e.target?.files[0]?.name);
-    onFileSelect(uploadedFile, e.target?.files[0]?.name, id);
+    if (e.target.files[0].type.indexOf('pdf') === -1) {
+      alert('Ez a fájl nem PDF formátumú.\nVálassz másik fájlt!');
+      return;
+    }
+    const uploadedFile = URL.createObjectURL(e.target.files[0]);
+    setFileName(e.target?.files[0].name);
+    onFileSelect(uploadedFile, e.target?.files[0].name, id);
   }
 
   function onMinus() {
