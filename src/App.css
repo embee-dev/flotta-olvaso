@@ -26,13 +26,6 @@ body {
         margin-block-end: 0.25em;
     }
 }
-.flottaSzamlaTitle {
-}
-
-.flottaSzamlaManager {
-}
-.flottaSzamlaManager-add {
-}
 
 .flottaSzamlaOsszesito {
     display: grid;
@@ -80,6 +73,9 @@ body {
     box-shadow: 10px 10px black;
     color: white;
 }
+.flottaSzamlaElement-processing {
+    --dialogbg: silver;
+}
 .flottaSzamlaElement-invalid {
     --dialogbg: red;
 
@@ -115,9 +111,13 @@ body {
 }
 
 .flottaSzamlaElement-filename {
+    overflow-wrap: anywhere;
 }
-
-.flottaSzamlaElement-buttons {
+.flottaSzamlaElement-process {
+    .flottaIcon {
+        aspect-ratio: 1;
+        margin-inline-end: .25em;
+    }
 }
 
 .flottaButton {

@@ -58,6 +58,13 @@ function App() {
         szamla.vegosszeg = szamlaInterFace.vegosszeg;
         szamla.sorszam = szamlaInterFace.sorszam;
       });
+    } else if (operation === 'makeblank' && key) {
+      updateSzamlak((draft) => {
+        const szamla = draft.find((a) => a.id === key);
+        szamla.invalid = szamlaInterFace.invalid;
+        szamla.vegosszeg = szamlaInterFace.vegosszeg;
+        szamla.sorszam = szamlaInterFace.sorszam;
+      });
     }
   }
 
@@ -65,6 +72,8 @@ function App() {
     (async function () {
       let doc, pageTexts = '';
       let sorszam, vegosszeg;
+
+      szamlaUpdater('makeblank', key);
 
       try {
         doc = await PDFJS.getDocument(fileBlob).promise;  
