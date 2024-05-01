@@ -135,7 +135,7 @@ body {
 
     .flottaIcon {
         opacity: 1;
-        transition: opacity var(--feedback-time);
+        transition: opacity var(--feedback-time) cubic-bezier(1,1,1,.25);
     }
 }
 .flottaButton:hover {
