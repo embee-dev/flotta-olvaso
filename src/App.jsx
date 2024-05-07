@@ -1,7 +1,8 @@
 import * as PDFJS from 'pdfjs-dist/build/pdf';
-import * as pdfjsWorker from 'pdfjs-dist/build/pdf.worker';
+import * as pdfjsWorker from 'pdfjs-dist/build/pdf.worker.mjs';
 window.PDFJS = PDFJS;
-PDFJS.GlobalWorkerOptions.workerSrc = pdfjsWorker;
+window.pdfjsWorker = pdfjsWorker;
+PDFJS.GlobalWorkerOptions.workerSrc = 'pdfjsWorker';
 
 import { useImmer } from 'use-immer';
 import SzamlaElement from './SzamlaElement.jsx';
