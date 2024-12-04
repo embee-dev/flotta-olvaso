@@ -32,7 +32,7 @@ function App() {
   const [szamlak, updateSzamlak] = useImmer(szamlaElemek);
 
   const regs = {
-    sorszam: /Sorszám:\s+([0-9-]+)\s+/,
+    sorszam: /Sorszám:?\s+([0-9-]+)\s+/,
     vegosszeg: /Bruttó végösszeg:\s+([0-9- ]+)\s+/,
   };
 
